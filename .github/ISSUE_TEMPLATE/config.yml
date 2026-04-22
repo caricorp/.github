@@ -1,0 +1,14 @@
+blank_issues_enabled: false
+
+contact_links:
+  - name: Security vulnerabilities
+    url: https://cari.net/support/contact/
+    about: Report security concerns privately through CARI.net support channels.
+
+  - name: Support questions
+    url: https://cari.net/support/contact/
+    about: Use the support contact path for customer support and general questions.
+
+  - name: Company website
+    url: https://cari.net/
+    about: Learn more about CARI.net services and company information.

@@ -1,0 +1,106 @@
+name: Feature Request
+description: Propose a scoped feature with enough context for product, engineering, and LLM-assisted implementation
+title: "[Feature]: "
+labels:
+  - feature
+  - needs-triage
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template for roadmap or operational improvements that are within expected product scope.
+        Focus on the user problem, acceptance criteria, and implementation context.
+
+  - type: input
+    id: affected_app
+    attributes:
+      label: Target app or service
+      description: Which product, repository, or service should this land in?
+      placeholder: "customer-portal"
+    validations:
+      required: true
+
+  - type: input
+    id: owner_team
+    attributes:
+      label: Owning team
+      description: Which team should evaluate and implement this work?
+      placeholder: "Application Engineering"
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+      description: Describe the user, operator, or business problem.
+      placeholder: "Account managers cannot export customer contract summaries without manually compiling data from multiple screens."
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed_solution
+    attributes:
+      label: Proposed solution
+      description: Describe the expected feature or behavior.
+      placeholder: "Add a contract summary export action on the customer overview page."
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance_criteria
+    attributes:
+      label: Acceptance criteria
+      description: List concrete conditions that define done.
+      placeholder: |
+        - Users with account-manager role can export a PDF summary.
+        - Export includes contract term, MRR, renewal date, and active services.
+        - Export action is audited.
+    validations:
+      required: true
+
+  - type: textarea
+    id: affected_areas
+    attributes:
+      label: Affected areas
+      description: List relevant repos, services, endpoints, UI areas, automations, or integrations.
+      placeholder: |
+        - customer-portal frontend
+        - contracts-api
+        - pdf-export worker
+
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Constraints and non-goals
+      description: Document scope limits, compliance constraints, deadlines, or explicit exclusions.
+      placeholder: "Do not change contract editing workflows. PDF only in phase 1."
+
+  - type: dropdown
+    id: priority_hint
+    attributes:
+      label: Requested priority
+      options:
+        - P1
+        - P2
+        - P3
+    validations:
+      required: true
+
+  - type: textarea
+    id: validation_plan
+    attributes:
+      label: Suggested validation
+      description: Describe how the team should verify delivery.
+      placeholder: |
+        - Add automated API and UI coverage for export.
+        - Validate sample output with account managers in staging.
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Confirmation
+      options:
+        - label: This request is within current product or platform scope
+          required: true
+        - label: I have searched for an existing request
+          required: true

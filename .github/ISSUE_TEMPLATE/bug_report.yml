@@ -1,0 +1,163 @@
+name: Bug Report
+description: Report a reproducible bug or regression with enough detail for an LLM or engineer to fix it quickly
+title: "[Bug]: "
+labels:
+  - bug
+  - needs-triage
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Provide concrete reproduction details, scope, and validation context.
+        This template is intentionally structured so an LLM or engineer can move from issue intake to root-cause analysis with minimal back-and-forth.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Bug summary
+      description: Describe the bug in one or two sentences.
+      placeholder: "When a user submits the invoice form, the request succeeds but the UI stays in a loading state."
+    validations:
+      required: true
+
+  - type: input
+    id: affected_app
+    attributes:
+      label: Affected app or service
+      description: Name the repository, product area, or service where the bug lives.
+      placeholder: "billing-portal"
+    validations:
+      required: true
+
+  - type: input
+    id: owner_team
+    attributes:
+      label: Owning team
+      description: Which team or function should triage this first?
+      placeholder: "Platform" 
+
+  - type: textarea
+    id: business_impact
+    attributes:
+      label: Business impact
+      description: Explain who is affected and why this matters.
+      placeholder: "Customer invoices cannot be submitted, blocking month-end billing for managed hosting accounts."
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Include exact steps, inputs, and state needed to reproduce the behavior.
+      placeholder: |
+        1. Sign in as a billing admin.
+        2. Open Invoices > Drafts.
+        3. Click Submit on invoice INV-1042.
+        4. Observe the loading spinner never completes.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: Describe the correct result.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Describe the incorrect result, including user-visible impact.
+    validations:
+      required: true
+
+  - type: textarea
+    id: suspected_area
+    attributes:
+      label: Suspected area
+      description: If known, identify the component, endpoint, job, workflow, or file area that likely controls the behavior.
+      placeholder: "Frontend mutation state in invoice submit flow, or POST /api/invoices/{id}/submit response handling."
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Severity
+      description: Choose the business and operational impact.
+      options:
+        - Critical (system unusable, data loss)
+        - High (major functionality broken)
+        - Medium (workaround exists)
+        - Low (minor issue)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: regression
+    attributes:
+      label: Regression?
+      description: Identify whether this used to work.
+      options:
+        - "Yes"
+        - "No"
+        - "Unknown"
+    validations:
+      required: true
+
+  - type: input
+    id: introduced_in
+    attributes:
+      label: Version, release, or commit where observed
+      description: Include app version, deploy time, SHA, or release tag if known.
+      placeholder: "v2026.04.21.3 or 8f3b91d"
+
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Where does this occur?
+      placeholder: "Production, Chrome 134 on macOS, API v2, tenant acme-co"
+
+  - type: textarea
+    id: repro_artifacts
+    attributes:
+      label: Reproduction artifacts
+      description: Include request payloads, example records, test data, URLs, feature flags, or credentials setup notes that make reproduction faster.
+      placeholder: |
+        - Tenant: acme-co
+        - Invoice ID: INV-1042
+        - Feature flag: billing_v2=true
+        - Sample payload: {"invoiceId":"INV-1042"}
+      render: shell
+
+  - type: textarea
+    id: validation_plan
+    attributes:
+      label: Suggested validation
+      description: Describe the fastest way to prove the fix works.
+      placeholder: |
+        - Add or update a regression test for invoice submission.
+        - Re-run the submit flow for INV-1042 in staging.
+        - Confirm loading state clears and status changes to Submitted.
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs, traces, screenshots, or failing tests
+      description: Paste stack traces, error IDs, screenshots, links to traces, or failing test output.
+      render: shell
+
+  - type: checkboxes
+    id: confirmations
+    attributes:
+      label: Confirmation
+      options:
+        - label: I have searched for existing issues
+          required: true
+        - label: I included enough detail for someone else to reproduce the bug
+          required: true
+        - label: This issue is reproducible
+          required: false
