@@ -1,136 +1,48 @@
-name: Sales-Sponsored Feature
-description: Capture an out-of-scope feature requested by sales, including approval and revenue target
-title: "[Sales Request]: "
+name: Sales Request
+description: Capture a sales-driven request with only the details needed to route it
+title: "[sales] "
 labels:
-  - feature
-  - sales-request
-  - needs-triage
+  - sales
 
 body:
   - type: markdown
     attributes:
       value: |
-        Use this template when sales requests a feature that is outside normal roadmap scope.
-        Approved requests should receive explicit priority treatment, so this form requires revenue and approval context.
+        Use this for requests coming from sales. Add just enough context to route and prioritize it.
 
   - type: input
-    id: requesting_account
+    id: account
     attributes:
-      label: Customer or prospect
-      description: Which account or opportunity is driving the request?
-      placeholder: "Acme Manufacturing"
-    validations:
-      required: true
-
-  - type: input
-    id: crm_reference
-    attributes:
-      label: CRM opportunity or account reference
-      description: Link or identifier from the sales system.
-      placeholder: "SFDC-10482"
-
-  - type: input
-    id: affected_app
-    attributes:
-      label: Target app or service
-      description: Which product, repository, or service would need the change?
-      placeholder: "customer-portal"
+      label: Customer, prospect, or deal
+      placeholder: "Acme Manufacturing / SFDC-10482"
     validations:
       required: true
 
   - type: textarea
-    id: request_summary
+    id: summary
     attributes:
-      label: Request summary
-      description: Summarize the requested feature and why it is outside normal scope.
-      placeholder: "Prospect requires SAML group-to-role mapping during provisioning, which is not supported in the standard edition."
-    validations:
-      required: true
-
-  - type: textarea
-    id: business_case
-    attributes:
-      label: Revenue target and business case
-      description: Provide expected ARR, MRR, deal value, renewal protection, or expansion impact.
-      placeholder: |
-        ARR target: $180,000
-        Expansion potential: +$60,000 within 12 months
-        Risk if declined: likely lose deal to competitor
-    validations:
-      required: true
-
-  - type: dropdown
-    id: approval_status
-    attributes:
-      label: Approval status
-      description: Approved sales exceptions should be prioritized above standard roadmap items.
-      options:
-        - Needs review
-        - Approved
-        - Rejected
+      label: What is being requested?
+      description: Short summary of the request and the business context.
+      placeholder: "Prospect needs SAML group-to-role mapping to close the deal."
     validations:
       required: true
 
   - type: input
-    id: approver
+    id: affected_area
     attributes:
-      label: Approver
-      description: Name the person approving the scope exception.
-      placeholder: "VP Product"
+      label: App, service, or area
+      placeholder: "auth-service / SAML provisioning"
 
   - type: input
-    id: requested_by
+    id: deadline
     attributes:
-      label: Sales owner
-      description: Who from sales owns the opportunity?
-      placeholder: "Jane Smith"
-    validations:
-      required: true
-
-  - type: input
-    id: target_date
-    attributes:
-      label: Decision or delivery deadline
-      description: Date tied to deal stage, contract timing, or renewal.
+      label: Deadline
       placeholder: "2026-05-15"
-
-  - type: textarea
-    id: acceptance_criteria
-    attributes:
-      label: Acceptance criteria
-      description: Define the smallest deliverable that unlocks the sale.
-      placeholder: |
-        - Admins can map SAML groups to built-in roles.
-        - Mapping is applied during first login.
-        - Feature is available for the named customer tenant only in phase 1.
-    validations:
-      required: true
-
-  - type: textarea
-    id: impacted_areas
-    attributes:
-      label: Impacted areas
-      description: List repos, services, integrations, customer operations, or support processes involved.
-      placeholder: |
-        - customer-portal frontend
-        - auth-service
-        - Okta SAML integration
-
-  - type: textarea
-    id: validation_plan
-    attributes:
-      label: Suggested validation
-      description: Describe how the team should verify the minimum sale-enabling delivery.
-      placeholder: |
-        - Validate mapping in staging with sample IdP assertions.
-        - Confirm the named customer workflow with sales engineering.
 
   - type: checkboxes
     id: confirmations
     attributes:
       label: Confirmation
       options:
-        - label: This request is outside current roadmap or standard scope
-          required: true
-        - label: Revenue target or deal impact is documented above
+        - label: This request came from sales
           required: true
