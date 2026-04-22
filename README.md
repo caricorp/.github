@@ -7,6 +7,3 @@ The public organization landing page is defined in [profile/README.md](profile/R
 ## Included organization standards
 
 - LLM-oriented issue intake forms for bugs, standard features, and sales-sponsored exceptions
-- An organization-level Projects v2 operating model for cross-repository visibility and prioritization
-
-See [.github/PROJECTS_V2_OPERATING_MODEL.md](.github/PROJECTS_V2_OPERATING_MODEL.md) for the recommended board structure, fields, and prioritization rules.
