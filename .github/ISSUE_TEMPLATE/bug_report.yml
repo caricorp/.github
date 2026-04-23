@@ -1,14 +1,36 @@
 name: Bug
 description: Report a bug with the key details needed to triage it quickly
+type: bug
 title: "[bug] "
 labels:
-  - bug
+  - priority:2
+projects:
+  - caricorp/21
 
 body:
   - type: markdown
     attributes:
       value: |
         Keep this short. For bugs, include the error log, stack trace, screenshot, or failing output whenever possible.
+
+        Swimlane automation note:
+        - Link pull requests with a closing keyword such as `Closes #<issue-number>`.
+        - PR opened (draft or ready) -> `code-review`
+        - PR merged -> `testing`
+        - promote workflow success -> `released`
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: Set the delivery priority.
+      options:
+        - 1 - critical (sale/owner default)
+        - 2 - standard default
+        - 3 - nice to have
+      default: 1
+    validations:
+      required: true
 
   - type: textarea
     id: summary
@@ -51,4 +73,6 @@ body:
       label: Confirmation
       options:
         - label: I searched for an existing issue
+          required: true
+        - label: I will link the pull request using a closing keyword (for example, Closes #123)
           required: true

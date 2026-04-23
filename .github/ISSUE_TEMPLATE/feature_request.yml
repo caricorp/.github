@@ -1,8 +1,11 @@
 name: Feature
 description: Request a feature with minimal intake boilerplate
+type: feature
 title: "[feat] "
 labels:
-  - feat
+  - priority:2
+projects:
+  - caricorp/21
 
 body:
   - type: markdown
@@ -10,12 +13,79 @@ body:
       value: |
         Use this for standard feature requests. Keep it concise so intake is easy.
 
+        Source-specific requirement note:
+        - If Request Source is `sales`, fill Sales fields.
+        - If Request Source is `owner`, fill Owner fields.
+        - The automation bot validates this after submit and will request missing details.
+
+        Swimlane automation note:
+        - Link pull requests with a closing keyword such as `Closes #<issue-number>`.
+        - PR opened (draft or ready) -> `code-review`
+        - PR merged -> `testing`
+        - promote workflow success -> `released`
+
+  - type: dropdown
+    id: request_source
+    attributes:
+      label: Request Source
+      description: Who is driving this request?
+      options:
+        - owner
+        - sales
+        - other
+      default: 0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: Set the delivery priority.
+      options:
+        - 1 - critical
+        - 2 - standard default
+        - 3 - nice to have
+      default: 1
+    validations:
+      required: true
+
   - type: textarea
     id: summary
     attributes:
       label: What do you need?
       description: Short description of the feature request.
       placeholder: "Add CSV export to the customer contracts list."
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      description: What problem are we solving and for whom?
+      placeholder: "Account managers cannot quickly share filtered contract data with customers."
+    validations:
+      required: true
+
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: What should be true after this is delivered?
+      placeholder: "Users can export the current filtered list in under 10 seconds."
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Provide bullet points that define done.
+      placeholder: |
+        - Export button is visible for users with export permission.
+        - Export includes currently applied filters.
+        - Export completes within 10 seconds for up to 50k rows.
     validations:
       required: true
 
@@ -32,10 +102,52 @@ body:
       description: Add context, desired outcome, or simple acceptance notes.
       placeholder: "Account managers need a fast export to share contract summaries with customers."
 
+  - type: markdown
+    attributes:
+      value: |
+        ### Sales fields (required when Request Source = sales)
+
+  - type: input
+    id: sales_account
+    attributes:
+      label: Sales - Customer/prospect/deal
+      placeholder: "Acme Manufacturing / SFDC-10482"
+
+  - type: input
+    id: sales_deadline
+    attributes:
+      label: Sales - Deadline
+      placeholder: "2026-05-15"
+
+  - type: textarea
+    id: sales_impact
+    attributes:
+      label: Sales - Impact if not delivered
+      placeholder: "May block renewal expansion for 400 seats."
+
+  - type: markdown
+    attributes:
+      value: |
+        ### Owner fields (required when Request Source = owner)
+
+  - type: input
+    id: owner_goal
+    attributes:
+      label: Owner - Goal / KPI
+      placeholder: "Reduce manual support escalations by 30%."
+
+  - type: textarea
+    id: owner_scope
+    attributes:
+      label: Owner - Scope notes
+      placeholder: "In scope: contract list page only. Out of scope: invoice exports."
+
   - type: checkboxes
     id: confirmations
     attributes:
       label: Confirmation
       options:
         - label: I searched for an existing request
+          required: true
+        - label: I will link the pull request using a closing keyword (for example, Closes #123)
           required: true

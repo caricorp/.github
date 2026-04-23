@@ -1,6 +1,10 @@
 blank_issues_enabled: false
 
 contact_links:
+  - name: Bug report or feature request
+    url: https://github.com/orgs/caricorp/projects/21/views/3
+    about: Use one of the two issue forms (Bug or Feature) for managed intake.
+
   - name: Security vulnerabilities
     url: https://cari.net/support/contact/
     about: Report security concerns privately through CARI.net support channels.
