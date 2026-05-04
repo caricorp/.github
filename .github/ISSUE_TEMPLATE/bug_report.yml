@@ -3,7 +3,7 @@ description: Report a bug with the key details needed to triage it quickly
 type: bug
 title: "[bug] "
 labels:
-  - priority:2
+  - P1
 projects:
   - caricorp/21
 
@@ -11,7 +11,7 @@ body:
   - type: markdown
     attributes:
       value: |
-        Keep this short. For bugs, include the error log, stack trace, screenshot, or failing output whenever possible.
+        Keep this short. Include logs, stack traces, screenshots, or failing output when available.
 
         Swimlane automation note:
         - Link pull requests with a closing keyword such as `Closes #<issue-number>`.
@@ -25,9 +25,9 @@ body:
       label: Priority
       description: Set the delivery priority.
       options:
-        - 1 - critical (sale/owner default)
-        - 2 - standard default
-        - 3 - nice to have
+        - P0 - critical
+        - P1 - standard default
+        - P2 - nice to have
       default: 1
     validations:
       required: true
@@ -42,10 +42,11 @@ body:
       required: true
 
   - type: input
-    id: affected_area
+    id: issue_url
     attributes:
-      label: Affected app, service, or area
-      placeholder: "billing-portal / customer save flow"
+      label: Issue URL
+      description: Link the issue in the app (not the GitHub issue URL).
+      placeholder: "https://app.example.com/issues/123"
 
   - type: textarea
     id: details
@@ -62,10 +63,8 @@ body:
     id: logs
     attributes:
       label: Logs or error output
-      description: Paste the error, stack trace, screenshot, or failing test output.
+      description: Paste any error, stack trace, screenshot, or failing test output.
       render: shell
-    validations:
-      required: true
 
   - type: checkboxes
     id: confirmations
@@ -73,6 +72,4 @@ body:
       label: Confirmation
       options:
         - label: I searched for an existing issue
-          required: true
-        - label: I will link the pull request using a closing keyword (for example, Closes #123)
           required: true
